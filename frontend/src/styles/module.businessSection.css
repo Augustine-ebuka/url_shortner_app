@@ -1,0 +1,201 @@
+.business-container{
+    background-image: url(../images/Ellipse\ 6.png);
+    background-position:top right;
+    background-repeat: no-repeat;
+    background-size: contain;
+    height:700px;
+    margin: auto
+}
+.business-content{
+    @apply m-20;
+    margin-top: 30px;
+    
+}
+.text{
+    margin-bottom: 40px;
+    width: 80%;
+   
+}
+.text h1{
+    color: #175FEC;
+    font-size: 38px;
+    font-family: Lexend Deca;
+    font-weight: 800;
+    inline-size: 500px;
+    word-wrap: break-word;
+    line-height: 50px;
+}
+.forms{
+    margin: auto;
+    width: 100%;
+
+    border-radius: 20px;
+    background: #F5F4FF;
+    padding: 30px;
+
+}
+.forms button{
+    background-color: #175FEC;
+    color: white;
+    padding: auto;
+    height: 50px;
+    width: 200px;
+    border-radius: 10px;
+    margin-top: 30px;
+}
+.form-container{
+  margin: auto;
+
+}
+.form-container h1{
+    color: #000;
+    font-size: 28px;
+    font-family: Lexend Deca;
+    font-weight: 800;
+    margin-bottom: 50px;
+}
+.form-container label{
+    color: #175FEC;
+    font-size: 16px;
+    font-family: Lexend Deca;
+    font-weight: 500;
+}
+.form-container .input1{
+    width: 100%;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid #175FEC;
+    background: #FFF;
+    padding: 20px;
+}
+.form-container .input1:focus{
+    border: 1px solid #175FEC;
+}
+.below{
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+
+}
+/* .below input{
+    width: 50%;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid #175FEC;
+    background: #FFF;
+} */
+.input-data{
+    display:flex;
+    flex-direction: column;
+
+}
+.input-data:nth-child(1){
+    flex: 1;
+}
+.input-data:nth-child(2){
+    flex: 1;
+}
+.input-data input{
+    width: 100%;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid #175FEC;
+    background: #FFF;
+    padding:20px ;
+}
+.shorturl{
+    width: 100%;
+    height: 50px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    border: 1px solid #175FEC;
+    background: #FFF;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+
+} 
+
+.copied {
+    color: green;
+  }
+  
+@media screen and (max-width: 768px){
+    .business-content{
+        @apply m-7;
+        margin-top: 30px;
+        
+    }
+    .text{
+        margin-bottom: 30px;
+        width: 80%;
+       
+    }
+    .text h1{
+        color: #175FEC;
+        font-size: 28px;
+        font-family: Lexend Deca;
+        font-weight: 800;
+        inline-size: 300px;
+        word-wrap: break-word;
+        line-height: 40px;
+    }
+    .forms{
+        margin: auto;
+        width: 100%;
+        border-radius: 20px;
+        background: #F5F4FF;
+        padding: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    
+    }
+    .forms button{
+        background-color: #175FEC;
+        color: white;
+        padding: auto;
+        height: 50px;
+        width: 200px;
+        border-radius: 10px;
+        margin-top: 30px;
+    }
+    .form-container{
+      margin: auto;
+    
+    }
+    .form-container h1{
+        color: #000;
+        font-size: 28px;
+        font-family: Lexend Deca;
+        font-weight: 800;
+        margin-bottom: 50px;
+    }
+    .form-container label{
+        color: #175FEC;
+        font-size: 16px;
+        font-family: Lexend Deca;
+        font-weight: 500;
+    }
+    .form-container .input1{
+        width: 100%;
+        height: 50px;
+        flex-shrink: 0;
+        border-radius: 10px;
+        border: 1px solid #175FEC;
+        background: #FFF;
+    }
+    .below{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        margin-top: 30px;
+    
+    
+
+}
+}
