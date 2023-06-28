@@ -1,8 +1,10 @@
 import React from 'react'
 import '../styles/module.signin.css'
 import SideImage from '../images/side-picture.svg'
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function SigninForm() {
+  
   return (
       <div className='signup-container'>
           <h1 className='font-bold text-blue-700 text-4xl text-center pb-8'>Make every connection count</h1>

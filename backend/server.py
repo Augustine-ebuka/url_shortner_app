@@ -3,9 +3,8 @@ from flask import Flask, url_for, redirect, request, jsonify, session
 import datetime, string, random
 from flask_cors import CORS, cross_origin
 import json 
+from flask_bcrypt import Bcrypt
 from model import db, User
-
-
 
 
 
@@ -13,6 +12,7 @@ from model import db, User
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 app.config['CORS_HEADERS'] = 'Content-Type'
+bcrypt = Bcrypt(app)
 
 # configure the SQLite database, relative to the app instance folder
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///ushort.db"
@@ -24,13 +24,10 @@ db.init_app(app)
 
  
 SQLALCHEMY_TRACK_MODIFICATIONS = False
-SQLALCHEMY_ECHO = True
-
- 
-
+SQLALCHEMY_ECHO = True 
 with app.app_context():
 	db.create_all()
-# ----------------------------------------------------------------
+
 generated_url = {}
 
 @app.route("/users")
@@ -38,27 +35,60 @@ def user_list():
     users = db.session.execute(db.select(User).order_by(User.username)).scalars()
     return (users)
 
-@app.route("/users/create", methods=["POST"])
+
+# User Authentication(sign up)
+@app.route("/users/signup", methods=["POST"])
 def signup():
-    email = request.json["email"]
-    password = request.json["password"]
- 
-    user_exists = User.query.filter_by(email=email).first() is not None
- 
-    if user_exists:
-        return jsonify({"error": "Email already exists"}), 409
-     
-   
-    new_user = User(email=email, password=password)
-    db.session.add(new_user)
-    db.session.commit()
- 
-    session["user_id"] = new_user.id
- 
-    return jsonify({
-        "id": new_user.id,
-        "email": new_user.email
-    })
+	if request.method == "POST":
+		first_name = request.json['first_name']
+		last_name = request.json['last_name']
+		email = request.json['email']
+		password = request.json['password']
+		
+		# check if user exist before inserting into the database
+		user_exists = User.query.filter_by(email=email).first()
+
+		if user_exists:
+			return jsonify({"error": "user already exists"}), 409
+		
+		# hash password for security reasons
+		hashed_password = bcrypt.generate_password_hash(password)
+		new_user = User(first_name= first_name,last_name=last_name,email=email, password=hashed_password)
+		db.session.add(new_user)
+		db.session.commit()
+		return jsonify({
+			"id": new_user.id,
+    	  "email": new_user.email,
+	      "message": "User created successfully"
+		}), 200
+
+# User Authentication(sign in)
+@app.route("/users/signin", methods=["POST"])
+def signin():
+	if request.method == "POST":
+		email = request.json['email']
+		password = request.json['password']
+
+		# check user existence
+		user =  User.query.filter(User.email == email).first()
+		if user is None:
+			return jsonify({"error":"user does not exist"}), 401
+		
+		if not bcrypt.check_password_hash(user.password, password):
+			return jsonify({"error":"UnAuthenticated"}), 401
+		
+		session["user_id"] = user.id
+  
+		return jsonify({
+			"id": user.id,
+			"email": user.email,
+			"message": "login successful"
+		})
+		
+      
+		
+
+
 
 
 # funtion to genrate six random strings
@@ -79,7 +109,6 @@ def shorturl():
 		while short_url in generated_url:
 			short_url = generate_random(6)
 
-
 		generated_url[short_url] = long_url
 		with open("mylink.json", "w") as link:
 			json.dump(generated_url, link) 
@@ -99,11 +128,6 @@ def redirect_url(short_url):
 		return "url not found", 500
 		
 
-@app.route("/son", methods=["GET", "POST"])
-def get_son():
-	email = request.json['email']
-	password = request.json['password']
-	return jsonify({"name": email, "message":"success"})
 # # Running app
 if __name__ == '__main__':
 	app.run(debug=True)
