@@ -1,8 +1,8 @@
-# Please, your star will be mush appreciated 🫂💖🥂
+# Please, your star ⭐ will be mush appreciated 🫂💖🥂
 # A simple URL shortener that is easy to use and free built with python flask and React.js.
-## The app has a simple user interface.
-## the app allow user to manage their links
-## you can shorten your url without signingup but there is limitation, e.g you can track your link clickes, you can edit your url to your own.
+The app has a simple user interface.
+the app allow user to manage their links
+you can shorten your url without signingup but there is limitation, e.g you can track your link clickes, you can edit your url to your own.
 
 # How to use it:
    1. Signup by clicking the signup button at the left top of the navabar
