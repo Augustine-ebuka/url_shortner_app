@@ -6,6 +6,8 @@ import Navbar from "./component/navbar";
 import Home from './pages/home.jsx'
 import Signup from './pages/signup'
 import Signin from "./pages/signin";
+import Dashboard from "./pages/profile";
+import Footer from "./component/footer";
 
 
 
@@ -20,7 +22,9 @@ function App() {
 			<Route exact path='/' element={<Home/>}/>
 			<Route exact path='/signup' element={<Signup/>}/>
 			<Route exact path='/signin' element={<Signin />}/>
+			<Route exact path='/dashboard' element={<Dashboard />}/>
 			</Routes>
+			<Footer></Footer>
 	</>
 	);
 }

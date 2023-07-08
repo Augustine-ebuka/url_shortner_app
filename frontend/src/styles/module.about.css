@@ -1,0 +1,49 @@
+.about-container{
+
+}
+
+.about-content{
+    @apply px-20;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.about-content h1{
+    color: #175FEC;
+    font-family: Lexend Deca;
+    font-size: 52px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.about-content p{
+    color: #000;
+font-family: Lexend Deca;
+font-size: 15px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+word-wrap: break-word;
+text-align: center;
+width: 70%;
+}
+.two-para{
+    display: block;
+    margin-top: 10px;
+}
+@media screen and (max-width: 768px){
+    .about-content p{
+        color: #000;
+    font-family: Lexend Deca;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    word-wrap: break-word;
+    text-align: center;
+    width: 100%;
+    }
+}

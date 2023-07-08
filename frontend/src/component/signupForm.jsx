@@ -32,7 +32,7 @@ export default function SignupForm() {
           .then((data) => {
             console.log(data);
             toast.success(data.message)
-            navigate('/')
+            navigate('/signin')
           })
           .catch((error) => {
           toast.error("not registered")
