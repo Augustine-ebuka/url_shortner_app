@@ -46,4 +46,15 @@ width: 70%;
     text-align: center;
     width: 100%;
     }
+    .about-content h1{
+        color: #175FEC;
+        font-size: 32px;
+    }
+    .about-content{
+        @apply px-8;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }

@@ -16,11 +16,13 @@ export default function SigninForm() {
     validateOnChange: false,
     onSubmit: async values => {
       try {
-        fetch('http://localhost:5000/users/signin', {
+        fetch('http://localhost:5000/users/signin',
+          {
           method: 'POST',
           headers:{"content-type": "application/json"},
           body: JSON.stringify(values)
-        }).then((response) => {
+          }
+        ).then((response) => {
           if (response.ok) {
             return response.json();
           }

@@ -8,7 +8,7 @@ export default function Footer() {
               <h1 className='font-bold text-center text-white text-4xl p-7'>Ushort</h1>
               <p className='text-color text-sm text-center text-white '>
                   Create short links, Share them anywhere. Track what’s working, and what’s not. All inside the Ushort Connections Platform.</p>
-              <h2 className='text-center text-white p-4'>copyright &copy; 2023</h2>
+              <h2 className='text-center text-white p-4'>copyright &copy; 2023 ALX PROJECT</h2>
         </div>
     </div>
   )

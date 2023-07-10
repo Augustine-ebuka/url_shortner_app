@@ -5,7 +5,7 @@ background-image: url(../images/Ellipse\ 6.png);
 background-position:top right;
 background-repeat: no-repeat;
 background-size: contain;
-height:700px;
+height:auto;
 margin: auto
 }
 .reason-content{
@@ -29,7 +29,7 @@ text-align: center;
     margin-top: 30px;
 }
 .reason-card{
-    width: 80%;
+    width: 100%;
     padding: 8px;
     display: flex;
     flex-direction: column;
@@ -60,7 +60,7 @@ text-align: center;
     transform: scale(1.1);
 }
 .reason-image-container{
-    height: 50%;
+
     overflow: hidden;
 }
 .reason-card-text{
@@ -78,7 +78,8 @@ text-align: center;
 }
 @media screen and (max-width: 768px){
     .reason-content{
-        @apply px-8;
+        @apply px-8 mb-14;
+
     
     }
     .reason-card-container{
@@ -88,5 +89,16 @@ text-align: center;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+    .reason-content h1{
+        color: #175FEC;
+    font-family: Lexend Deca;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: center;
+    
+    
     }
 }

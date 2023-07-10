@@ -1,5 +1,5 @@
 .hero-container{
-    height: 100vh;
+
     display: flex;
     justify-content: center;
     @apply px-20;
