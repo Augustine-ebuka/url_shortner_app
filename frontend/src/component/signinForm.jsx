@@ -4,6 +4,7 @@ import SideImage from '../images/side-picture.svg'
 import { Toaster, toast } from 'react-hot-toast'
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
+import axios from './httpClient'
 
 export default function SigninForm() {
   const navigate = useNavigate();
@@ -15,32 +16,25 @@ export default function SigninForm() {
     validateOnBlur: false, 
     validateOnChange: false,
     onSubmit: async values => {
-      try {
-        fetch('http://localhost:5000/users/signin',
-          {
-          method: 'POST',
-          headers:{"content-type": "application/json"},
-          body: JSON.stringify(values)
-          }
-        ).then((response) => {
-          if (response.ok) {
-            return response.json();
-          }
-        })
-          .then((data) => {
-            console.log(data);
-            toast.success(data.message)
-            setTimeout(() => { 
-              navigate(`/dashboard`)
-            }, 3000)
-          })
-          .catch((error) => {
-          toast.error("Password or username not correct")
-          console.log(error)
-        })
-      } catch (error) {
-        console.log(error);
+    try {
+      const { email, password } = values
+      const res = await axios.post('http://localhost:5000/users/signin', {
+        email,
+        password
+      })
+      if (res.status === 200) { 
+        toast.success(res.data.message)
+        setTimeout(() => {
+          navigate('/dashboard') 
+        }, 3000)
+        console.log("login successful")
+      } else {
+        toast.error(res.data.error)
+        console.log("password or username not correct");
       }
+    } catch (error) {
+     console.log("error eventually occure"); 
+    }
     }
   })
   
@@ -63,7 +57,7 @@ export default function SigninForm() {
                           <div className='d-from'>
                             <label htmlFor="input1">Enter password</label>
                             <input placeholder='Last name' {...formik.getFieldProps('password')} type='password'  name='password'></input>  
-                            <div className='d-from'><button>Log in</button></div> 
+                            <div className='d-from'><button type='submit'>Log in</button></div> 
                           </div>
                       </form>
                       

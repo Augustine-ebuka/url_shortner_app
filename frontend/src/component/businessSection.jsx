@@ -1,39 +1,34 @@
 import React from 'react'
 import { useState} from 'react'
 import '../styles/module.businessSection.css'
-import {BiCopy} from 'react-icons/bi'
+import { BiCopy } from 'react-icons/bi'
+import axios from './httpClient'
+import { useNavigate } from 'react-router-dom';
+
 
 export default function BusinessSection() {
-  const [longUrl, setLongUrl] = useState();
+  const [longUrl, setLongUrl] = useState('');
   const [shortUrl, setShortUrl] = useState();
   const [isCopied, setIsCopied] = useState(false);
-
+  const navigate = useNavigate()
   // function to handle submit form
-  const handlesubmit = (event) => { 
+  const handlesubmit =async (event) => { 
     event.preventDefault();
-    
-    const formD = new FormData();
-    formD.append('longurl', longUrl); // Append the 'longUrl' value to the FormData
-    
     try {
-      fetch('http://127.0.0.1:5000/', {
-        method: 'POST',
-        body: formD // Pass the FormData object as the request body
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          // console.log(data.long_url);
-          setShortUrl(data.short_url); // Handle the response data
-        })
-        .catch((error) => {
-          console.error(error); // Handle errors
-        });
+      const response = await axios('http://localhost:5000/users/signin/is_logged_in');
+      if (response.status === 200) {
+        const createLink = await axios.post('http://localhost:5000/', { "long_url":longUrl })
+        if (createLink.status === 200) {
+          setShortUrl(createLink.data.short_url);
+        }
+      }
     } catch (error) {
-      console.error(error); // Handle errors
+      console.log(error);
+      navigate('/signin')
+      
     }
   }
 
-  // copy function
 
   const copyShortUrl = () => {
     const shortUrlElement = document.querySelector('.shorturl p');
@@ -80,7 +75,7 @@ export default function BusinessSection() {
                                 </div>
                               </div>
                           </div>
-                          <button>Get short url</button>
+                          <button type='submit'>Get short url</button>
                     </form>
                   </div>
               </div>

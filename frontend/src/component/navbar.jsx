@@ -1,23 +1,35 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import '../styles/module.navbar.css'
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import axios from './httpClient'
+import nonUser from './nonUser'
+import Logout from './logout'
+
 
 export default function Navbar() {
     const [email, setEmail] = useState()
     const [login, setLogin] = useState(false)
     
     useEffect(() => {
-       try {
-           fetch('http://127.0.0.1:5000/users/signin/is_logged_in')
-            .then(respose => respose.json())
-            .then(data => console.log(data.login))
-            .catch(err => console.log(err));
-            
-       } catch (error) {
-        console.log(error);
-       }
-     },[])
+        const fetchData = async () => {
+          try {
+            const response = await axios('http://localhost:5000/users/signin/is_logged_in');
+              if (response.status !== 200) {
+                setLogin(false)
+              return
+            } else {
+                setLogin(true)
+                setEmail(response.data.username)
+              console.log(response.data);
+            }
+          } catch (error) {
+            console.log(error);
+          }
+        };
+      
+        fetchData();
+      }, []);
   return (
       <div className='navbarContainer'>
           <div className='logo'>
@@ -25,8 +37,22 @@ export default function Navbar() {
           </div>
           <div className='menu-list'>
               <ul>
-                  <li><Link to='/signup'>Sign up</Link></li>
-                  <li><Link to='/signin'>Sign in</Link></li>
+              <div>
+                      {login ? (
+                          <ul>
+                              <li className='text-white'>{email} </li>
+                              <li className='text-white'><Link to='/dashboard'>Dashboard</Link> </li>
+                              <Logout></Logout>
+                          </ul>
+                    
+                ) : (
+                     <ul>
+                        <li><Link to='/signup'>Sign up</Link></li>
+                        <li><Link to='/signin'>Sign in</Link></li>  
+                    </ul>
+            
+                )}
+                </div>
               </ul>
           </div>
     </div>

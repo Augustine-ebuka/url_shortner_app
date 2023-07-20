@@ -5,7 +5,7 @@ import SideImage from '../images/side-picture.svg'
 import { useFormik } from 'formik'
 import { Toaster, toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom';
-
+import axios from './httpClient'
 
 export default function SignupForm() {
  const navigate = useNavigate()
@@ -20,28 +20,26 @@ export default function SignupForm() {
     validateOnChange: false,
     onSubmit: async values => {
       try {
-        fetch('http://localhost:5000/users/signup', {
-          method: 'POST',
-          headers:{"content-type": "application/json"},
-          body: JSON.stringify(values)
-        }).then((response) => {
-          if (response.ok) {
-            return response.json();
-          }
-        })
-          .then((data) => {
-            console.log(data);
-            toast.success(data.message)
-            navigate('/signin')
-          })
-          .catch((error) => {
-          toast.error("not registered")
-          console.log(error)
-        })
+        const { first_name, last_name, email, password } = values;
+        const response = await axios.post('http://localhost:5000/users/signup', {
+          first_name,
+          last_name,
+          email,
+          password,
+        });
+        if (response.status === 200) {
+          toast.success(response.message);
+          console.log(response.data);
+          navigate('/signin'); // Redirect to a success page if desired
+        } else {
+          toast.error(response.error);
+        }
       } catch (error) {
+        toast.error("unable to sign up");
         console.log(error);
       }
-    }
+      }
+    
   })
   
   return (

@@ -58,7 +58,7 @@
 }
 .dashboard-right{
     background-color:white;
-    height: 300px;
+    height: auto;
     width: 60%;
     gap: 20px;
 }
@@ -81,7 +81,20 @@
     justify-content: space-between;
     align-items: center;
     padding: 0px 15px 0px 15px;
+    cursor: pointer;
+  
 }
+
+.active{
+    background-color: bisque;
+    color:rgba(23, 95, 236, 1);
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 15px 0px 15px;
+    transition: all 0.7s ease-in-out;
+} 
 .data-wrapper{
     margin: 30px;
 
@@ -91,6 +104,13 @@
     flex-direction: column;
     gap: 20px;
     
+}
+.long-url{
+    inline-size: 570px;
+    word-wrap: break-word;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-size: 14px;
 }
 .data-wrapper button{
     background-color:rgba(23, 95, 236, 1);
