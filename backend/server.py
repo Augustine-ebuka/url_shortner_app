@@ -17,7 +17,7 @@ bcrypt = Bcrypt(app)
 
 # configure the SQLite database, relative to the app instance folder
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///ushortDatabase.db"
-app.config['SECRET_KEY'] = 'hebrus98$'
+app.config['SECRET_KEY'] = '747qhh7dhn20u3ufh'
 
 # initialize the app with the extension
 db.init_app(app)
